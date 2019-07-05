@@ -1,0 +1,18 @@
+<template>
+    <div class="contact-list">
+        <ul class="list-group">
+            <!-- repeat.for - repeat the <li> element for each contact in the contacts array 
+                The 2nd class is a way of adding the 'active' class to the li if the contact's id is the same as the selectedId
+                of the contact on our ContactList view model -->
+            <li repeat.for="contact of contacts" class="list-group-item ${contact.id === $parent.selectedId ? 'active' : ''}">
+                <!-- The route-href attribute here generates a href based on the route's name and a set of parameters 
+                    Bind the contact's id parameter as the route's id parameter 
+                    -->
+                <a route-href="route: contacts; parems.bind: {id:contact.id}" click.delegate="parent.select(contact)">
+                    <h4>${contact.firstName} ${contact.lastName}</h4>
+                    <p>${contact.email}</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</template>
