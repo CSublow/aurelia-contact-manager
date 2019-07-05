@@ -1,12 +1,16 @@
 import {inject} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
 /* Use dependency injection to get an instance of our WebAPI. We need this to load the contact detail data */
 import {WebAPI} from './web-api';
 import {areEqual} from './utility';
+/* Import the messages that were created in message.js */
+import {ContactUpdated, ContactViewed} from './messages';
 
 @inject(WebAPI)
 export class ContactDetail {
   constructor(api){
     this.api = api;
+    this.ea = ea;
   }
 
   /* activate is a life-cycle method for routed components
@@ -24,6 +28,7 @@ export class ContactDetail {
       this.contact = contact;
       this.routeConfig.navModel.setTitle(contact.firstName);
       this.originalContact = JSON.parse(JSON.stringify(contact));
+      this.ea.publish(new ContactViewed(this.contact));
     });
   }
 
@@ -38,13 +43,20 @@ export class ContactDetail {
       this.routeConfig.navModel.setTitle(contact.firstName);
       /* Here the original contact info is overwritten with the new contact info */
       this.originalContact = JSON.parse(JSON.stringify(contact));
+      this.ea.publish(new ContactUpdated(this.contact));
     });
   }
 
   /* This activates a confirm box if the user tries to navigate away from a contact with unsaved changes */
   canDeactivate() {
     if (!areEqual(this.originalContact, this.contact)){
-      return confirm('You have unsaved changes. Are you sure you wish to leave?');
+      let result = confirm('You have unsaved changes. Are you sure you wish to leave?');
+  
+      if(!result) {
+        this.ea.publish(new ContactViewed(this.contact));
+      }
+
+      return result;
     }
 
     return true;
