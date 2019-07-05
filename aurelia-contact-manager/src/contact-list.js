@@ -21,6 +21,6 @@ export class ContactList {
 
     select(contact) {
         this.selectedId = contact.id;
-        return true
+        return true;
     }
 }

@@ -11,7 +11,7 @@
                     However, returning true on the method (see contact-list.js) the normal action will be allowed to continue.
                     The effect of this is that when the user clicks on the contact, the contact is selected immediately, and then the nav
                     goes to the selected contact -->
-                <a route-href="route: contacts; parems.bind: {id:contact.id}" click.delegate="parent.select(contact)">
+                <a route-href="route: contacts; params.bind: {id:contact.id}" click.delegate="$parent.select(contact)">
                     <h4>${contact.firstName} ${contact.lastName}</h4>
                     <p>${contact.email}</p>
                 </a>
