@@ -1,6 +1,8 @@
 <template>
   <!-- Require basically means import -->
   <require from="./styles.css"></require>
+  <!-- Importing contact-list here makes contact-list visible to this view -->
+  <require from="./contact-list"></require>
 
   <nav class="navbar navbar-light bg-light fixed-top">
     <a class="navbar-brand" href="#">
@@ -11,7 +13,8 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-md-4">Contact List Placeholder</div>
+      <!-- The custom element, imported with contact-list, goes here -->
+      <contact-list class="col-md-4"></contact-list>
       <!-- router-view indicates where the router should render the current route -->
       <router-view class="col-md-8"></router-view>
     </div>
