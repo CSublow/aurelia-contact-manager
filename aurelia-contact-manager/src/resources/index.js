@@ -1,3 +1,8 @@
+import {PLATFORM} from 'aurelia-framework';
+  
 export function configure(config) {
-  //config.globalResources([]);
+  /* Register the loading-indicator as a global resource */
+  config.globalResources([PLATFORM.moduleName('./elements/loading-indicator')]);
 }
+
+
