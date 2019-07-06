@@ -1,6 +1,11 @@
-import {PLATFORM} from 'aurelia-pal';
+import {inject, PLATFORM} from 'aurelia-pal';
+import {WebAPI} from './web-api';
 
+@inject(WebAPI)
 export class App {
+  constructor(api) {
+    this.api = api;
+  }
   /* Whenever you have a configureRouter method, the view must contain a router-view
     In this case, that can be found in app.html */
   configureRouter(config, router) {
