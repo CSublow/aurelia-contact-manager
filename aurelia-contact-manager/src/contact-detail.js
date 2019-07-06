@@ -4,11 +4,11 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {WebAPI} from './web-api';
 import {areEqual} from './utility';
 /* Import the messages that were created in message.js */
-import {ContactUpdated, ContactViewed} from './messages';
+import {ContactUpdated, ContactViewed} from './message';
 
-@inject(WebAPI)
+@inject(WebAPI, EventAggregator)
 export class ContactDetail {
-  constructor(api){
+  constructor(api, ea){
     this.api = api;
     this.ea = ea;
   }
