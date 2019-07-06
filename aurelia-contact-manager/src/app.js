@@ -1,4 +1,4 @@
-import {inject, PLATFORM} from 'aurelia-pal';
+import {inject, PLATFORM} from 'aurelia-framework';
 import {WebAPI} from './web-api';
 
 @inject(WebAPI)
